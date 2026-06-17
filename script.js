@@ -3,21 +3,21 @@ const bookingKey = "gsEventCoBookings";
 const addOns = [
   {
     name: "Additional Animal Hopper",
-    description: "Add another ride-on animal for additional play options.",
+    description: "Add another ride-on animal for extra play fun.",
     price: 25,
-    icon: "hopper"
+    image: "assets/images/addon-animal-hopper.jpg"
   },
   {
     name: "Additional Ball Color",
-    description: "Add a second ball color to match your event theme.",
+    description: "Match your event theme with a second ball color.",
     price: 15,
-    icon: "balls"
+    image: "assets/images/addon-ball-color.jpg"
   },
   {
     name: "Toddler Table & Chairs",
-    description: "Child-sized table and chair setup for snacks, crafts, and activities.",
+    description: "Child-sized seating perfect for snacks, crafts, and activities.",
     price: 50,
-    icon: "table"
+    image: "assets/images/addon-toddler-table-chairs.jpg"
   }
 ];
 
@@ -93,11 +93,12 @@ function renderAddonCards() {
   addonCards.innerHTML = addOns
     .map(
       (addon) => `
-        <article class="addon-card reveal">
-          <span class="addon-icon addon-icon-${addon.icon}" aria-hidden="true"></span>
+        <article class="addon-card reveal" data-addon-card="${addon.name}">
+          <img src="${addon.image}" alt="${addon.name}" width="1402" height="1024" loading="lazy" />
           <h3>${addon.name}</h3>
+          <strong>+$${addon.price}</strong>
           <p>${addon.description}</p>
-          <strong>$${addon.price}</strong>
+          <button class="button button-light addon-select" type="button" data-addon-select="${addon.name}">Select</button>
         </article>
       `
     )
@@ -107,13 +108,37 @@ function renderAddonCards() {
     .map(
       (addon) => `
         <label class="choice-card">
-          <input type="checkbox" name="addons" value="${addon.name} (+$${addon.price})" data-price="${addon.price}" />
+          <input type="checkbox" name="addons" value="${addon.name}" data-price="${addon.price}" />
           <span>${addon.name}</span>
           <strong>+$${addon.price}</strong>
         </label>
       `
     )
     .join("");
+
+  qsa("[data-addon-select]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const checkbox = qsa('input[name="addons"]').find((input) => input.value === button.dataset.addonSelect);
+      if (!checkbox) return;
+      checkbox.checked = !checkbox.checked;
+      updateAddonCardStates();
+      renderReview();
+    });
+  });
+
+  qsa('input[name="addons"]').forEach((input) => {
+    input.addEventListener("change", updateAddonCardStates);
+  });
+}
+
+function updateAddonCardStates() {
+  const selected = new Set(selectedAddons().map((addon) => addon.name));
+  qsa("[data-addon-card]").forEach((card) => {
+    const isSelected = selected.has(card.dataset.addonCard);
+    card.classList.toggle("selected", isSelected);
+    const button = card.querySelector(".addon-select");
+    if (button) button.textContent = isSelected ? "Selected" : "Select";
+  });
 }
 
 function showStep(index) {
@@ -308,5 +333,6 @@ bookingForm.addEventListener("submit", (event) => {
 
   bookingForm.reset();
   bookingMessage.textContent = "Your booking request has been saved. G&S Event Co. will follow up soon.";
+  updateAddonCardStates();
   showStep(0);
 });

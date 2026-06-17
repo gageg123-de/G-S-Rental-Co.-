@@ -1,151 +1,158 @@
-# Little Luxe Soft Play
+# G&S Event Co.
 
-A launch-ready static website for a luxury soft play rental business. The project uses only HTML, CSS, and vanilla JavaScript, so it can be opened directly in a browser or deployed to GitHub Pages without a build step.
+Static GitHub Pages website for **G&S Event Co.**, a luxury soft play and event rental brand.
 
-## Files
+Tagline:
 
-- `index.html` - Page structure, content, SEO tags, and booking/admin sections.
-- `style.css` - Responsive styling, visual placeholders, layout, and animations.
-- `script.js` - Mobile navigation, form validation, local booking storage, admin preview, and JSON export.
-- `README.md` - Setup and customization notes.
+> Elegant soft play and event rentals for unforgettable celebrations.
 
-## 1. How to Run Locally
+## Project Structure
+
+This site is intentionally static and GitHub Pages deployable.
+
+- `index.html`
+- `style.css`
+- `script.js`
+- `README.md`
+- `assets/images/`
+
+There are no frameworks, npm dependencies, build tools, or backend services.
+
+## How To Run Locally
 
 Open `index.html` directly in your browser.
 
-No Node.js, npm, backend, database, or framework is required.
+For the most accurate local preview, you can also serve the folder with any simple static server, then visit the local URL it provides.
 
-## 2. How to Deploy to GitHub Pages
+## Image Files
 
-1. Create a GitHub repository.
-2. Upload `index.html`, `style.css`, `script.js`, and `README.md` to the repository root.
-3. In GitHub, open `Settings`.
-4. Go to `Pages`.
-5. Under `Build and deployment`, choose `Deploy from a branch`.
-6. Select the `main` branch and `/root` folder.
-7. Save, then wait for GitHub to publish the Pages URL.
+All image assets live in `assets/images/`.
 
-## 3. How to Change Company Information
+Current filenames used by the website:
 
-Edit these areas in `index.html`:
+- `hero-soft-play.jpg`
+- `service-soft-play-rentals.jpg`
+- `service-ball-pit.jpg`
+- `service-bounce-house.jpg`
+- `service-foam-mats.jpg`
+- `service-toddler-play-zone.jpg`
+- `service-playpen-fence.jpg`
+- `service-event-styling.jpg`
+- `package-basic.jpg`
+- `package-premium.jpg`
+- `addon-animal-hopper.jpg`
+- `addon-ball-color.jpg`
+- `addon-toddler-table-chairs.jpg`
 
-- Header brand text near the top of the file.
-- Hero headline and subheadline in the `hero` section.
-- About text in the `about` section.
-- Contact details in the `contact` section.
-- Footer business name and tagline.
+To replace a photo, keep the same filename and overwrite the image in `assets/images/`. The HTML already points to those names.
 
-You can also update SEO text in the `<head>`:
+Recommended image sizes:
 
-- `<title>`
-- `<meta name="description">`
-- Open Graph title and description tags.
+- Hero image: 1600px wide or larger
+- Service and package images: 1200px to 1600px wide
+- Use JPG or WebP
+- Keep a similar horizontal aspect ratio so cards stay consistent
+- Compress images before uploading for faster mobile loading
 
-## 4. How to Update Package Pricing
+## How To Update Package Pricing
 
-In `index.html`, find the `packages` section.
+Package prices appear in `index.html` in two places:
 
-Replace each placeholder price:
+- The package cards in `<section id="packages">`
+- The booking form package choices in Step 3
 
-```html
-Starting at <strong>$000</strong>
-```
+Current packages:
 
-with the real starting price for each package.
+- Basic Package - $250
+- Premium Package - $300
+- Custom Quote
 
-You can also edit each package's feature list and best-for description in the same section.
+The booking estimate reads package prices from each radio button's `data-price` value.
 
-## 5. How to Replace Gallery Images
+## How To Update Add-ons
 
-The gallery currently uses CSS visual placeholders so the project stays limited to four files.
+Add-ons are managed in `script.js` in the `addOns` array.
 
-To use real photos later:
+Current add-ons:
 
-1. Add image files to your repository.
-2. Replace each gallery placeholder in `index.html` with an image tag.
-3. Example:
+- Additional Animal Hopper - $25
+- Additional Ball Color - $15
+- Toddler Table & Chairs - $50
 
-```html
-<figure class="gallery-item">
-  <img src="images/setup-1.jpg" alt="Neutral soft play birthday setup">
-  <figcaption>Neutral Birthday Setup</figcaption>
-</figure>
-```
+Example:
 
-4. Add this CSS to `style.css` if you use image tags:
-
-```css
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+```js
+{
+  name: "Additional Animal Hopper",
+  description: "Add another ride-on animal for extra play fun.",
+  price: 25,
+  image: "assets/images/addon-animal-hopper.jpg"
 }
 ```
 
-If you want to keep GitHub Pages deployment simple, use relative image paths and commit the image files to the same repository.
+The visible add-on shopping cards and booking form selectable add-ons are generated from this array. Each add-on card uses its `image` value for the product photo.
 
-## 6. How to Change Contact Info
+## How To Update Business Contact Info
 
-In `index.html`, find the `contact` section and update:
+Edit the Contact section in `index.html`.
 
-- Phone number
-- Email address
-- Service area
-- Social media links
+Current placeholders:
 
-Also update the `tel:` and `mailto:` link values so buttons and links continue working correctly.
+- Phone: `(555) 123-4567`
+- Email: `hello@gseventco.com`
+- Service Area: `Your City + Surrounding Areas`
+- Social: `Instagram`, `Facebook`, `TikTok`
 
-## 7. How to Connect Twilio SMS Notifications Later
+## Booking Form
 
-The current site is static, so it should not call Twilio directly from the browser. A Twilio Auth Token must stay private.
+Booking requests are saved in browser `localStorage`.
 
-Recommended future approach:
+The admin login section has been removed from the public page. When you are ready for a private booking manager, connect the form to a real backend and build the admin view behind proper authentication.
 
-1. Create a small serverless function using Netlify Functions, Vercel Functions, Cloudflare Workers, or a similar backend.
-2. Store Twilio credentials as private environment variables.
-3. Send booking form data from `script.js` to that function with `fetch`.
-4. Have the function send the SMS through Twilio.
+## How To Deploy On GitHub Pages
 
-The placeholder comment is in `script.js` inside the booking form submit handler:
+1. Push these files and the `assets/images/` folder to your GitHub repository.
+2. Go to repository `Settings`.
+3. Open `Pages`.
+4. Under `Build and deployment`, choose:
+   - Source: `Deploy from a branch`
+   - Branch: `main`
+   - Folder: `/root`
+5. Save.
 
-```js
-// Future integration:
-// Send SMS notification to business owners
-// using Twilio API when booking is received.
-```
+GitHub Pages will serve `index.html` automatically.
 
-## 8. How to Connect a Real Booking Backend Later
+## How To Connect Twilio Later
 
-The current admin panel stores booking requests in `localStorage`, which is useful for a static preview but not for production booking management across devices.
+This static version cannot securely send SMS directly because Twilio secrets must not be placed in browser JavaScript.
 
-Recommended backend options:
+When ready:
 
-- Supabase table for bookings.
-- Airtable form endpoint.
-- Google Forms or Google Apps Script endpoint.
-- Serverless function that writes to a database.
-
-For Supabase later:
-
-1. Create a `bookings` table with fields matching the form.
-2. Replace the `localStorage` save logic in `script.js` with a `fetch` request or Supabase client call.
-3. Move any private service keys to a serverless function.
-4. Update the admin preview to read bookings from the backend instead of browser storage.
-
-The placeholder comment is in `script.js` inside the booking form submit handler:
+1. Create a secure backend endpoint using Netlify Functions, Vercel Functions, Supabase Edge Functions, or another server.
+2. Store these secrets only on the server:
+   - `TWILIO_ACCOUNT_SID`
+   - `TWILIO_AUTH_TOKEN`
+   - `TWILIO_FROM_NUMBER`
+3. In `script.js`, find:
 
 ```js
-// Future integration:
-// Replace localStorage with a Supabase backend table
-// for secure, multi-device booking management.
+// Future Twilio integration:
+// Send SMS notification to G&S Event Co. partners when a booking request is submitted.
 ```
 
-## Admin Preview
+4. Replace that comment area with a `fetch()` call to your secure backend endpoint.
 
-The admin booking preview password is:
+Never place Twilio Auth Tokens in `script.js`, `index.html`, or any public GitHub Pages file.
 
-```text
-admin123
-```
+## How To Connect A Real Booking Backend Later
 
-This is intentionally simple for local preview only. It is not real authentication. Use a backend authentication system before relying on the admin panel for real customer data.
+Keep the current form UI, then replace the localStorage save inside the `bookingForm` submit handler in `script.js` with a request to a secure backend.
+
+Good launch-ready backend options:
+
+- Supabase table plus Row Level Security
+- Netlify Functions
+- Vercel Functions
+- Supabase Edge Functions
+
+Store private API keys only in backend environment variables, never in the static website files.
