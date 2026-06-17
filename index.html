@@ -28,23 +28,28 @@
         <span class="brand-line"></span>
         <span class="brand-sub">Event Co.</span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="site-nav" aria-label="Primary navigation">
+      <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
         <a href="#services">Services</a>
         <a href="#packages">Packages</a>
         <a href="#gallery">Gallery</a>
         <a href="#booking">Booking</a>
         <a href="#faq">FAQ</a>
-        <a href="#admin">Admin</a>
       </nav>
     </header>
 
     <main id="home">
       <section class="hero">
         <div class="hero-media">
-          <img src="assets/images/hero-soft-play.jpg" alt="Luxury neutral soft play setup by G&S Event Co." />
+          <img
+            src="assets/images/hero-soft-play.jpg"
+            alt="Luxury neutral soft play setup by G&S Event Co. with white bounce house, ball pit, and foam play pieces"
+            width="1280"
+            height="853"
+            fetchpriority="high"
+          />
         </div>
         <div class="hero-content reveal">
           <p class="eyebrow">G&amp;S Event Co.</p>
@@ -73,14 +78,41 @@
           <p>Neutral, polished rentals designed to look beautiful in the room while giving little guests a safe place to play.</p>
         </div>
         <div class="service-grid">
-          <article class="image-card reveal"><img src="assets/images/soft-play-rentals.jpg" alt="Soft play rental setup" /><h3>Soft Play Rentals</h3></article>
-          <article class="image-card reveal"><img src="assets/images/ball-pit.jpg" alt="White ball pit with pastel balls" /><h3>Ball Pits</h3></article>
-          <article class="image-card reveal"><img src="assets/images/bounce-house.jpg" alt="White toddler bounce house" /><h3>Bounce House Rentals</h3></article>
-          <article class="image-card reveal"><img src="assets/images/foam-mats.jpg" alt="Foam play mats" /><h3>Foam Play Mats</h3></article>
-          <article class="image-card reveal"><img src="assets/images/toddler-zone.jpg" alt="Toddler play zone" /><h3>Toddler Play Zones</h3></article>
-          <article class="image-card reveal"><img src="assets/images/playpen-setup.jpg" alt="White playpen setup" /><h3>Playpen Setups</h3></article>
-          <article class="image-card reveal"><img src="assets/images/custom-theme.jpg" alt="Custom color theme setup" /><h3>Custom Color Themes</h3></article>
-          <article class="image-card reveal"><img src="assets/images/event-styling.jpg" alt="Event styling add-ons" /><h3>Event Styling Add-ons</h3></article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-soft-play-rentals.jpg" alt="Complete luxury soft play rental setup with white equipment and neutral decor" width="1280" height="853" loading="lazy" />
+            <h3>Soft Play Rentals</h3>
+            <p>Complete luxury soft play setups with mats, climbers, ball pits, and toddler-friendly equipment.</p>
+          </article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-ball-pit.jpg" alt="White square ball pit filled with soft pastel balls" width="1280" height="853" loading="lazy" />
+            <h3>Ball Pits</h3>
+            <p>White square ball pits with soft pastel ball options to match your event style.</p>
+          </article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-bounce-house.jpg" alt="Elegant white bounce house with neutral balloon styling" width="1280" height="853" loading="lazy" />
+            <h3>Bounce House Rentals</h3>
+            <p>Elegant white bounce house rentals for birthdays, celebrations, and family events.</p>
+          </article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-foam-mats.jpg" alt="Neutral foam mats creating a soft play surface" width="1280" height="853" loading="lazy" />
+            <h3>Foam Play Mats</h3>
+            <p>Neutral foam flooring that creates a clean, soft, and safe play surface.</p>
+          </article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-toddler-play-zone.jpg" alt="Toddler play zone with foam climbers, ball pit, animal hopper, and table setup" width="1280" height="853" loading="lazy" />
+            <h3>Toddler Play Zones</h3>
+            <p>Full toddler activity areas designed for safe, stylish, age-appropriate play.</p>
+          </article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-playpen-fence.jpg" alt="White fenced soft play area with ball pit and climbing pieces" width="1280" height="853" loading="lazy" />
+            <h3>Playpen / Fence Setup</h3>
+            <p>White fenced play areas that keep little guests contained while maintaining a polished look.</p>
+          </article>
+          <article class="image-card reveal">
+            <img src="assets/images/service-event-styling.jpg" alt="Styled soft play event setup with balloons, white play pieces, and gold accents" width="1280" height="853" loading="lazy" />
+            <h3>Event Styling Add-ons</h3>
+            <p>Balloon styling, decor, and finishing touches to elevate your event setup.</p>
+          </article>
         </div>
       </section>
 
@@ -96,7 +128,7 @@
         </div>
         <div class="package-grid">
           <article class="package-card reveal" data-package-card="basic">
-            <img src="assets/images/basic-package.jpg" alt="Basic Package soft play setup" />
+            <img src="assets/images/package-basic.jpg" alt="Basic Package fenced soft play setup with ball pit and foam climbers" width="1280" height="853" loading="lazy" />
             <div class="package-body">
               <h3>Basic Package</h3>
               <p>Best for small birthdays, baby showers, and intimate gatherings.</p>
@@ -117,14 +149,15 @@
           </article>
           <article class="package-card package-featured reveal" data-package-card="premium">
             <span class="featured-label">Most Popular</span>
-            <img src="assets/images/premium-package.jpg" alt="Premium Package with white bounce house" />
+            <img src="assets/images/package-premium.jpg" alt="Premium Package with white bounce house, soft play zone, and ball pit" width="1280" height="1024" loading="lazy" />
             <div class="package-body">
               <h3>Premium Package</h3>
               <p>Best for larger birthdays, premium events, and family celebrations.</p>
               <strong class="package-price">$300</strong>
               <ul>
-                <li>Everything in Basic</li>
+                <li>Everything in Basic Package</li>
                 <li>White Bounce House</li>
+                <li>Styled luxury setup</li>
               </ul>
               <a class="button button-primary package-cta" href="#booking" data-package-pick="Premium Package ($300)">Request Booking</a>
             </div>
@@ -148,16 +181,22 @@
           <p>Tap any image to view it full-screen.</p>
         </div>
         <div class="gallery-grid">
-          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-1.jpg" alt="G&S Event Co. gallery setup one" /></button>
-          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-2.jpg" alt="G&S Event Co. gallery setup two" /></button>
-          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-3.jpg" alt="G&S Event Co. gallery setup three" /></button>
-          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-4.jpg" alt="G&S Event Co. gallery setup four" /></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/hero-soft-play.jpg" alt="Full luxury G&S Event Co. soft play and bounce house setup" width="1280" height="853" loading="lazy" /><span>Full Luxe Setup</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-soft-play-rentals.jpg" alt="White soft play rental setup with bounce house and toddler table" width="1280" height="853" loading="lazy" /><span>Soft Play Rentals</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-ball-pit.jpg" alt="Close view of white square ball pit with pastel balls" width="1280" height="853" loading="lazy" /><span>Pastel Ball Pit</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-bounce-house.jpg" alt="White bounce house rental styled with balloons and flowers" width="1280" height="853" loading="lazy" /><span>White Bounce House</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-foam-mats.jpg" alt="Ivory and beige foam mats with soft play pieces" width="1280" height="853" loading="lazy" /><span>Foam Play Mats</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-toddler-play-zone.jpg" alt="Toddler play zone with white foam climbers and table" width="1280" height="853" loading="lazy" /><span>Toddler Play Zone</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-playpen-fence.jpg" alt="White playpen fence surrounding a soft play setup" width="1280" height="853" loading="lazy" /><span>Fence Setup</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/service-event-styling.jpg" alt="Neutral event styling with balloon arch and soft play rentals" width="1280" height="853" loading="lazy" /><span>Event Styling</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/package-basic.jpg" alt="Basic Package soft play setup inside a white play fence" width="1280" height="853" loading="lazy" /><span>Basic Package</span></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/package-premium.jpg" alt="Premium Package with bounce house, play fence, ball pit, and neutral styling" width="1280" height="1024" loading="lazy" /><span>Premium Package</span></button>
         </div>
       </section>
 
       <section class="section-pad split-section">
         <div class="split-image reveal">
-          <img src="assets/images/about-event-setup.jpg" alt="Elegant G&S Event Co. event setup" />
+          <img src="assets/images/service-soft-play-rentals.jpg" alt="Elegant G&S Event Co. event setup with soft play rentals and neutral styling" width="1280" height="853" loading="lazy" />
         </div>
         <div class="split-copy reveal">
           <p class="eyebrow">About G&amp;S</p>
@@ -175,7 +214,7 @@
           <h2>Simple from booking to pickup</h2>
         </div>
         <div class="process-image reveal">
-          <img src="assets/images/process-delivery.jpg" alt="G&S Event Co. delivery and setup process" />
+          <img src="assets/images/package-premium.jpg" alt="Completed G&S Event Co. premium setup ready for guests" width="1280" height="1024" loading="lazy" />
         </div>
         <div class="process-grid">
           <article class="reveal"><span>01</span><h3>Choose Your Package</h3><p>Select Basic, Premium, or request a custom quote.</p></article>
@@ -191,9 +230,9 @@
           <h2>Celebrations made easier</h2>
         </div>
         <div class="testimonial-shell reveal">
-          <button class="slider-btn" type="button" data-slide="prev" aria-label="Previous testimonial">‹</button>
+          <button class="slider-btn" type="button" data-slide="prev" aria-label="Previous testimonial">&lsaquo;</button>
           <div class="testimonial-track" id="testimonialTrack"></div>
-          <button class="slider-btn" type="button" data-slide="next" aria-label="Next testimonial">›</button>
+          <button class="slider-btn" type="button" data-slide="next" aria-label="Next testimonial">&rsaquo;</button>
         </div>
       </section>
 
@@ -296,37 +335,18 @@
           <article class="reveal"><span>Phone</span><strong>(555) 123-4567</strong></article>
           <article class="reveal"><span>Email</span><strong>hello@gseventco.com</strong></article>
           <article class="reveal"><span>Service Area</span><strong>Your City + Surrounding Areas</strong></article>
-          <article class="reveal"><span>Social</span><strong>Instagram · Facebook · TikTok</strong></article>
+          <article class="reveal"><span>Social</span><strong>Instagram &middot; Facebook &middot; TikTok</strong></article>
         </div>
       </section>
 
-      <section id="admin" class="section-pad admin-section warm-band">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Admin Preview</p>
-          <h2>Booking requests</h2>
-          <p>Static localStorage admin area for previewing requests and exporting JSON. Password: admin123</p>
-        </div>
-        <div id="adminLogin" class="admin-login reveal">
-          <label>Admin Password<input id="adminPassword" type="password" placeholder="admin123" /></label>
-          <button id="loginButton" class="button button-secondary" type="button">Open Admin</button>
-          <p id="loginMessage" class="form-message"></p>
-        </div>
-        <div id="adminPanel" class="admin-panel" hidden>
-          <div class="admin-actions">
-            <button id="exportJson" class="button button-secondary" type="button">Export JSON</button>
-            <button id="clearBookings" class="button button-light" type="button">Clear Bookings</button>
-          </div>
-          <div id="bookingPreview" class="booking-preview"></div>
-        </div>
-      </section>
     </main>
 
     <div class="lightbox" id="lightbox" hidden>
-      <button type="button" id="closeLightbox" aria-label="Close image">×</button>
+      <button type="button" id="closeLightbox" aria-label="Close image">&times;</button>
       <img id="lightboxImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" />
     </div>
 
-    <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+    <button class="back-top" id="backTop" type="button" aria-label="Back to top">&uarr;</button>
 
     <footer class="site-footer">
       <a class="brand-mark footer-brand" href="#home" aria-label="G&S Event Co. home">

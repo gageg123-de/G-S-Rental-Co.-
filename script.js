@@ -1,30 +1,23 @@
 const bookingKey = "gsEventCoBookings";
-const adminPassword = "admin123";
-
-const packages = {
-  "Basic Package ($250)": 250,
-  "Premium Package ($300)": 300,
-  "Custom Quote": 0
-};
 
 const addOns = [
   {
     name: "Additional Animal Hopper",
     description: "Add another ride-on animal for additional play options.",
     price: 25,
-    image: "assets/images/animal-hopper.jpg"
+    icon: "hopper"
   },
   {
     name: "Additional Ball Color",
     description: "Add a second ball color to match your event theme.",
     price: 15,
-    image: "assets/images/ball-colors.jpg"
+    icon: "balls"
   },
   {
     name: "Toddler Table & Chairs",
     description: "Child-sized table and chair setup for snacks, crafts, and activities.",
     price: 50,
-    image: "assets/images/toddler-table-chairs.jpg"
+    icon: "table"
   }
 ];
 
@@ -58,12 +51,6 @@ const bookingReview = qs("#bookingReview");
 const prevStep = qs("#prevStep");
 const nextStep = qs("#nextStep");
 const submitBooking = qs("#submitBooking");
-const adminPanel = qs("#adminPanel");
-const bookingPreview = qs("#bookingPreview");
-const loginButton = qs("#loginButton");
-const loginMessage = qs("#loginMessage");
-const exportJson = qs("#exportJson");
-const clearBookings = qs("#clearBookings");
 const testimonialTrack = qs("#testimonialTrack");
 
 let currentStep = 0;
@@ -107,7 +94,7 @@ function renderAddonCards() {
     .map(
       (addon) => `
         <article class="addon-card reveal">
-          <img src="${addon.image}" alt="${addon.name}" />
+          <span class="addon-icon addon-icon-${addon.icon}" aria-hidden="true"></span>
           <h3>${addon.name}</h3>
           <p>${addon.description}</p>
           <strong>$${addon.price}</strong>
@@ -155,15 +142,17 @@ function renderReview() {
   const pkg = selectedPackage();
   const addons = selectedAddons();
   const total = estimateTotal();
+  const remaining = pkg.name === "Custom Quote" ? "Custom Quote" : `$${Math.max(total - 50, 0)}`;
 
   bookingReview.innerHTML = `
     <div><span>Customer</span><strong>${formData.get("name") || "Not entered"}</strong></div>
     <div><span>Event</span><strong>${formData.get("eventDate") || "Date TBD"} at ${formData.get("eventTime") || "Time TBD"}</strong></div>
-    <div><span>Location</span><strong>${formData.get("location") || "Not entered"} · ${formData.get("setting") || "Setting TBD"}</strong></div>
+    <div><span>Location</span><strong>${formData.get("location") || "Not entered"} - ${formData.get("setting") || "Setting TBD"}</strong></div>
     <div><span>Package</span><strong>${pkg.name || "Not selected"}</strong></div>
     <div><span>Add-ons</span><strong>${addons.length ? addons.map((addon) => addon.name).join(", ") : "None selected"}</strong></div>
     <div><span>Estimated Total</span><strong>${money(total)}</strong></div>
-    <div><span>Deposit</span><strong>$50 Deposit Required To Reserve Your Date</strong></div>
+    <div><span>Deposit Due</span><strong>$50 Deposit Required To Reserve Your Date</strong></div>
+    <div><span>Estimated Remaining Balance</span><strong>${remaining}</strong></div>
   `;
 }
 
@@ -188,50 +177,6 @@ function bookingPayload() {
     notes: formData.get("notes"),
     createdAt: new Date().toISOString()
   };
-}
-
-function renderBookings() {
-  const bookings = getBookings();
-  if (!bookings.length) {
-    bookingPreview.innerHTML = '<p class="form-message">No booking requests yet.</p>';
-    return;
-  }
-
-  bookingPreview.innerHTML = bookings
-    .map(
-      (booking) => `
-        <article class="booking-item">
-          <h3>${booking.package}</h3>
-          <dl>
-            <dt>Customer Info</dt>
-            <dd>${booking.name}<br>${booking.email}<br>${booking.phone}</dd>
-            <dt>Event Date/Time</dt>
-            <dd>${booking.eventDate} at ${booking.eventTime}</dd>
-            <dt>Location</dt>
-            <dd>${booking.location}<br>${booking.setting || ""}</dd>
-            <dt>Selected Package</dt>
-            <dd>${booking.package}</dd>
-            <dt>Selected Add-ons</dt>
-            <dd>${booking.addons && booking.addons.length ? booking.addons.map((addon) => addon.name).join(", ") : "None selected"}</dd>
-            <dt>Estimated Total</dt>
-            <dd>${money(Number(booking.estimatedTotal || 0))}</dd>
-            <dt>Notes</dt>
-            <dd>${booking.notes || "No notes provided"}</dd>
-          </dl>
-        </article>
-      `
-    )
-    .join("");
-}
-
-function downloadJson() {
-  const blob = new Blob([JSON.stringify(getBookings(), null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "gs-event-co-bookings.json";
-  link.click();
-  URL.revokeObjectURL(url);
 }
 
 function renderTestimonials() {
@@ -265,7 +210,7 @@ function closeLightbox() {
 renderAddonCards();
 renderTestimonials();
 showStep(0);
-document.querySelector("#year").textContent = new Date().getFullYear();
+qs("#year").textContent = new Date().getFullYear();
 
 const observer = new IntersectionObserver(
   (entries) => entries.forEach((entry) => entry.target.classList.toggle("visible", entry.isIntersecting)),
@@ -316,13 +261,23 @@ qsa("[data-package-pick]").forEach((link) => {
 qsa(".gallery-item").forEach((button) => {
   button.addEventListener("click", () => openLightbox(button.querySelector("img")));
 });
+
 qs("#closeLightbox").addEventListener("click", closeLightbox);
 qs("#lightbox").addEventListener("click", (event) => {
   if (event.target.id === "lightbox") closeLightbox();
 });
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeLightbox();
+});
 
 qsa(".faq-item button").forEach((button) => {
-  button.addEventListener("click", () => button.parentElement.classList.toggle("open"));
+  button.addEventListener("click", () => {
+    const item = button.parentElement;
+    qsa(".faq-item").forEach((faq) => {
+      if (faq !== item) faq.classList.remove("open");
+    });
+    item.classList.toggle("open");
+  });
 });
 
 qsa("[data-slide]").forEach((button) => {
@@ -354,22 +309,4 @@ bookingForm.addEventListener("submit", (event) => {
   bookingForm.reset();
   bookingMessage.textContent = "Your booking request has been saved. G&S Event Co. will follow up soon.";
   showStep(0);
-  renderBookings();
-});
-
-loginButton.addEventListener("click", () => {
-  if (qs("#adminPassword").value !== adminPassword) {
-    loginMessage.textContent = "Incorrect password.";
-    return;
-  }
-  loginMessage.textContent = "";
-  adminPanel.hidden = false;
-  renderBookings();
-});
-
-exportJson.addEventListener("click", downloadJson);
-clearBookings.addEventListener("click", () => {
-  if (!confirm("Clear all local preview booking requests?")) return;
-  saveBookings([]);
-  renderBookings();
 });
