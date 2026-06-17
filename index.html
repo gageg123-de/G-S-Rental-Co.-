@@ -11,43 +11,46 @@
     <meta property="og:title" content="G&S Event Co. | Luxury Soft Play & Event Rentals" />
     <meta property="og:description" content="Elegant soft play and event rentals for unforgettable celebrations." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://dummyimage.com/1200x630/f8f3eb/9d7a3f&text=G%26S+Event+Co." />
-    <meta name="theme-color" content="#f8f3eb" />
+    <meta property="og:image" content="assets/images/hero-soft-play.jpg" />
+    <meta name="theme-color" content="#fbf7ef" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="site-header">
+    <header class="site-header" id="siteHeader">
       <a class="brand-mark" href="#home" aria-label="G&S Event Co. home">
         <span class="brand-main">G&amp;S</span>
         <span class="brand-line"></span>
         <span class="brand-sub">Event Co.</span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">Menu</button>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#services">Services</a>
         <a href="#packages">Packages</a>
-        <a href="#addons">Add-ons</a>
         <a href="#gallery">Gallery</a>
-        <a href="#faq">FAQ</a>
         <a href="#booking">Booking</a>
+        <a href="#faq">FAQ</a>
         <a href="#admin">Admin</a>
       </nav>
     </header>
 
     <main id="home">
-      <section class="hero section-pad">
-        <div class="hero-copy">
+      <section class="hero">
+        <div class="hero-media">
+          <img src="assets/images/hero-soft-play.jpg" alt="Luxury neutral soft play setup by G&S Event Co." />
+        </div>
+        <div class="hero-content reveal">
           <p class="eyebrow">G&amp;S Event Co.</p>
           <h1>Luxury Soft Play &amp; Event Rentals</h1>
           <p class="hero-sub">
-            Beautiful, safe, and thoughtfully styled setups for birthdays, baby showers, toddler parties, and family
-            celebrations.
+            Beautiful, safe, and thoughtfully styled setups for birthdays, baby showers, toddler parties, and family celebrations.
           </p>
           <p class="tagline">Elegant soft play and event rentals for unforgettable celebrations.</p>
           <div class="hero-actions">
@@ -61,284 +64,269 @@
             <span>Family-Friendly Rentals</span>
           </div>
         </div>
-        <div class="hero-visual" aria-label="Luxury soft play event mockup">
-          <div class="mock-scene hero-scene">
-            <div class="bounce-house"></div>
-            <div class="ball-pit large"></div>
-            <div class="foam-mats"></div>
-            <div class="play-fence"></div>
-            <div class="soft-blocks"></div>
-          </div>
-        </div>
       </section>
 
       <section id="services" class="section-pad">
-        <div class="section-heading">
-          <p class="eyebrow">Event Rental Services</p>
+        <div class="section-heading reveal">
+          <p class="eyebrow">Our Services</p>
           <h2>Premium rentals styled for modern celebrations</h2>
-          <p>
-            G&amp;S Event Co. creates neutral, polished rental layouts that look beautiful in event spaces while keeping
-            little guests safe and entertained.
-          </p>
+          <p>Neutral, polished rentals designed to look beautiful in the room while giving little guests a safe place to play.</p>
         </div>
         <div class="service-grid">
-          <article>Soft Play Rentals</article>
-          <article>Ball Pits</article>
-          <article>Bounce House Rentals</article>
-          <article>Foam Play Mats</article>
-          <article>Toddler Play Zones</article>
-          <article>Playpen/Fence Setups</article>
-          <article>Custom Color Themes</article>
-          <article>Event Styling Add-ons</article>
+          <article class="image-card reveal"><img src="assets/images/soft-play-rentals.jpg" alt="Soft play rental setup" /><h3>Soft Play Rentals</h3></article>
+          <article class="image-card reveal"><img src="assets/images/ball-pit.jpg" alt="White ball pit with pastel balls" /><h3>Ball Pits</h3></article>
+          <article class="image-card reveal"><img src="assets/images/bounce-house.jpg" alt="White toddler bounce house" /><h3>Bounce House Rentals</h3></article>
+          <article class="image-card reveal"><img src="assets/images/foam-mats.jpg" alt="Foam play mats" /><h3>Foam Play Mats</h3></article>
+          <article class="image-card reveal"><img src="assets/images/toddler-zone.jpg" alt="Toddler play zone" /><h3>Toddler Play Zones</h3></article>
+          <article class="image-card reveal"><img src="assets/images/playpen-setup.jpg" alt="White playpen setup" /><h3>Playpen Setups</h3></article>
+          <article class="image-card reveal"><img src="assets/images/custom-theme.jpg" alt="Custom color theme setup" /><h3>Custom Color Themes</h3></article>
+          <article class="image-card reveal"><img src="assets/images/event-styling.jpg" alt="Event styling add-ons" /><h3>Event Styling Add-ons</h3></article>
         </div>
       </section>
 
       <section id="packages" class="section-pad warm-band">
-        <div class="section-heading">
-          <p class="eyebrow">Packages</p>
-          <h2>Soft play packages</h2>
-          <p>Choose the setup that best fits your celebration. $50 Deposit Required To Reserve Your Date.</p>
+        <div class="section-heading reveal">
+          <p class="eyebrow">Rental Packages</p>
+          <h2>Choose your celebration setup</h2>
+          <p class="deposit-note">$50 Deposit Required To Reserve Your Date</p>
+        </div>
+        <div class="compare-toggle reveal" aria-label="Package comparison toggle">
+          <button class="compare-btn active" type="button" data-package-focus="basic">Basic</button>
+          <button class="compare-btn" type="button" data-package-focus="premium">Premium</button>
         </div>
         <div class="package-grid">
-          <article class="package-card">
-            <div class="mini-mock package-mock">
-              <div class="mat-tile"></div>
-              <div class="mini-pit"></div>
-              <div class="mini-blocks"></div>
+          <article class="package-card reveal" data-package-card="basic">
+            <img src="assets/images/basic-package.jpg" alt="Basic Package soft play setup" />
+            <div class="package-body">
+              <h3>Basic Package</h3>
+              <p>Best for small birthdays, baby showers, and intimate gatherings.</p>
+              <strong class="package-price">$250</strong>
+              <ul>
+                <li>4 Hour Rental</li>
+                <li>10x10 Fenced Soft Play Area</li>
+                <li>Foam Safety Mats</li>
+                <li>Soft Play Climbing Set</li>
+                <li>Square Ball Pit</li>
+                <li>One Ball Color Of Customer's Choice</li>
+                <li>One Animal Hopper Of Customer's Choice</li>
+                <li>Foam Building Blocks</li>
+                <li>Delivery, Setup &amp; Pickup</li>
+              </ul>
+              <a class="button button-primary package-cta" href="#booking" data-package-pick="Basic Package ($250)">Request Booking</a>
             </div>
-            <h3>Basic Package</h3>
-            <p>Best for small birthdays, baby showers, and intimate gatherings.</p>
-            <strong class="package-price">$250</strong>
-            <ul>
-              <li>4 Hour Rental</li>
-              <li>10x10 Fenced Soft Play Area</li>
-              <li>Foam Safety Mats</li>
-              <li>Soft Play Climbing Set</li>
-              <li>Square Ball Pit</li>
-              <li>One Ball Color Of Customer's Choice</li>
-              <li>One Animal Hopper Of Customer's Choice</li>
-              <li>Foam Building Blocks</li>
-              <li>Delivery</li>
-              <li>Setup</li>
-              <li>Pickup</li>
-            </ul>
-            <a class="button button-primary package-cta" href="#booking">Request Booking</a>
           </article>
-
-          <article class="package-card package-featured">
+          <article class="package-card package-featured reveal" data-package-card="premium">
             <span class="featured-label">Most Popular</span>
-            <div class="mini-mock package-mock">
-              <div class="mini-house tall"></div>
-              <div class="mini-pit"></div>
-              <div class="mini-fence"></div>
+            <img src="assets/images/premium-package.jpg" alt="Premium Package with white bounce house" />
+            <div class="package-body">
+              <h3>Premium Package</h3>
+              <p>Best for larger birthdays, premium events, and family celebrations.</p>
+              <strong class="package-price">$300</strong>
+              <ul>
+                <li>Everything in Basic</li>
+                <li>White Bounce House</li>
+              </ul>
+              <a class="button button-primary package-cta" href="#booking" data-package-pick="Premium Package ($300)">Request Booking</a>
             </div>
-            <h3>Premium Package</h3>
-            <p>Best for larger birthdays, premium events, and family celebrations.</p>
-            <strong class="package-price">$300</strong>
-            <ul>
-              <li>4 Hour Rental</li>
-              <li>10x10 Fenced Soft Play Area</li>
-              <li>Foam Safety Mats</li>
-              <li>White Bounce House</li>
-              <li>Soft Play Climbing Set</li>
-              <li>Square Ball Pit</li>
-              <li>One Ball Color Of Customer's Choice</li>
-              <li>One Animal Hopper Of Customer's Choice</li>
-              <li>Foam Building Blocks</li>
-              <li>Delivery</li>
-              <li>Setup</li>
-              <li>Pickup</li>
-            </ul>
-            <a class="button button-primary package-cta" href="#booking">Request Booking</a>
           </article>
         </div>
       </section>
 
       <section id="addons" class="section-pad">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">Add-On Rentals</p>
-          <h2>Premium add-ons</h2>
-          <p>Add a few thoughtful extras to match your event theme, play needs, and guest experience.</p>
+          <h2>Layer in thoughtful extras</h2>
+          <p>Add-ons can be selected in the booking form and included in the estimate.</p>
         </div>
         <div class="addon-grid" id="addonCards"></div>
       </section>
 
       <section id="gallery" class="section-pad warm-band">
-        <div class="section-heading">
-          <p class="eyebrow">Gallery</p>
-          <h2>G&amp;S Event Co. product mockups</h2>
-          <p>Polished placeholder scenes for planning your visual direction until real event photography is ready.</p>
+        <div class="section-heading reveal">
+          <p class="eyebrow">See Our Setups</p>
+          <h2>Soft, neutral, photo-ready event layouts</h2>
+          <p>Tap any image to view it full-screen.</p>
         </div>
         <div class="gallery-grid">
-          <article class="mock-card">
-            <div class="mock-scene castle-scene"><div class="castle"></div><div class="mat-grid"></div></div>
-            <h3>White Soft Play Block Castle</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene pit-scene"><div class="square-pit"></div></div>
-            <h3>White Square Ball Pit</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene mats-scene"><div class="floor-mats"></div><div class="foam-steps"></div></div>
-            <h3>White Foam Floor Mats</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene bounce-scene"><div class="bounce-house solo"></div></div>
-            <h3>White Toddler Bounce House</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene blocks-scene"><div class="block-stack"></div></div>
-            <h3>Foam Building Blocks</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene fence-scene"><div class="play-fence full"></div><div class="mini-pit"></div></div>
-            <h3>White Playpen/Fence Setup</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene stones-scene"><div class="stone-row"></div></div>
-            <h3>Soft Play Stepping Stones</h3>
-          </article>
-          <article class="mock-card">
-            <div class="mock-scene full-scene">
-              <div class="bounce-house"></div>
-              <div class="ball-pit large"></div>
-              <div class="soft-blocks"></div>
-              <div class="play-fence"></div>
-            </div>
-            <h3>Full Event Package Layout</h3>
-          </article>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-1.jpg" alt="G&S Event Co. gallery setup one" /></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-2.jpg" alt="G&S Event Co. gallery setup two" /></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-3.jpg" alt="G&S Event Co. gallery setup three" /></button>
+          <button class="gallery-item reveal" type="button"><img src="assets/images/gallery-setup-4.jpg" alt="G&S Event Co. gallery setup four" /></button>
         </div>
       </section>
 
-      <section id="faq" class="section-pad">
-        <div class="section-heading">
-          <p class="eyebrow">FAQ</p>
-          <h2>Booking details</h2>
-          <p>$50 Deposit Required To Reserve Your Date.</p>
+      <section class="section-pad split-section">
+        <div class="split-image reveal">
+          <img src="assets/images/about-event-setup.jpg" alt="Elegant G&S Event Co. event setup" />
         </div>
-        <div class="faq-grid">
-          <article class="faq-card">
-            <h3>How much is required to reserve my event date?</h3>
-            <p>A $50 non-refundable deposit is required to secure your booking date. Remaining balance is due before event setup.</p>
-          </article>
-          <article class="faq-card">
-            <h3>How long is each rental?</h3>
-            <p>Each package includes a 4 hour rental window, plus delivery, professional setup, and pickup.</p>
-          </article>
-          <article class="faq-card">
-            <h3>Is equipment cleaned before each event?</h3>
-            <p>Yes. Equipment is sanitized before every setup and arranged with a safety-focused layout.</p>
-          </article>
+        <div class="split-copy reveal">
+          <p class="eyebrow">About G&amp;S</p>
+          <h2>Designed for families, styled for the event</h2>
+          <p>
+            G&amp;S Event Co. brings a refined rental experience to toddler-friendly celebrations. Every setup is planned
+            around flow, safety, and the soft neutral styling modern hosts want in photos.
+          </p>
         </div>
       </section>
 
-      <section id="booking" class="section-pad booking-section warm-band">
-        <div class="section-heading">
+      <section class="section-pad process-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">How It Works</p>
+          <h2>Simple from booking to pickup</h2>
+        </div>
+        <div class="process-image reveal">
+          <img src="assets/images/process-delivery.jpg" alt="G&S Event Co. delivery and setup process" />
+        </div>
+        <div class="process-grid">
+          <article class="reveal"><span>01</span><h3>Choose Your Package</h3><p>Select Basic, Premium, or request a custom quote.</p></article>
+          <article class="reveal"><span>02</span><h3>We Confirm Details</h3><p>We review date, timing, address, and add-ons.</p></article>
+          <article class="reveal"><span>03</span><h3>Enjoy Your Event</h3><p>We deliver and professionally set up the play area.</p></article>
+          <article class="reveal"><span>04</span><h3>Pickup &amp; Clean Up</h3><p>We return for pickup after your rental window.</p></article>
+        </div>
+      </section>
+
+      <section class="section-pad testimonials warm-band">
+        <div class="section-heading reveal">
+          <p class="eyebrow">What Parents Are Saying</p>
+          <h2>Celebrations made easier</h2>
+        </div>
+        <div class="testimonial-shell reveal">
+          <button class="slider-btn" type="button" data-slide="prev" aria-label="Previous testimonial">‹</button>
+          <div class="testimonial-track" id="testimonialTrack"></div>
+          <button class="slider-btn" type="button" data-slide="next" aria-label="Next testimonial">›</button>
+        </div>
+      </section>
+
+      <section id="booking" class="section-pad booking-section">
+        <div class="section-heading reveal">
           <p class="eyebrow">Request Booking</p>
-          <h2>Tell us about your celebration</h2>
-          <p>Submit your event details and G&amp;S Event Co. will follow up to confirm availability. $50 Deposit Required To Reserve Your Date.</p>
+          <h2>Reserve your celebration date</h2>
+          <p class="deposit-note">$50 Deposit Required To Reserve Your Date</p>
         </div>
-        <div class="included-panel">
+        <div class="included-panel reveal">
           <p class="eyebrow">What's Included With Every Rental</p>
           <div class="included-grid">
-            <span>&#10003; Delivery Included</span>
-            <span>&#10003; Professional Setup</span>
-            <span>&#10003; Pickup Included</span>
-            <span>&#10003; Sanitized Equipment</span>
-            <span>&#10003; 4 Hour Rental Window</span>
-            <span>&#10003; Safety-Focused Layouts</span>
+            <span>Delivery Included</span>
+            <span>Professional Setup</span>
+            <span>Pickup Included</span>
+            <span>Sanitized Equipment</span>
+            <span>4 Hour Rental Window</span>
+            <span>Safety-Focused Layouts</span>
           </div>
         </div>
-        <form id="bookingForm" class="booking-form">
-          <div class="form-grid">
-            <label>
-              Name
-              <input name="name" type="text" required />
-            </label>
-            <label>
-              Email
-              <input name="email" type="email" required />
-            </label>
-            <label>
-              Phone
-              <input name="phone" type="tel" required />
-            </label>
-            <label>
-              Package
-              <select name="package" required>
-                <option value="">Select a package</option>
-                <option>Basic Package ($250)</option>
-                <option>Premium Package ($300)</option>
-                <option>Custom Quote</option>
-              </select>
-            </label>
-            <label>
-              Event Date
-              <input name="eventDate" type="date" required />
-            </label>
-            <label>
-              Event Time
-              <input name="eventTime" type="time" required />
-            </label>
-            <label class="form-wide">
-              Event Location
-              <input name="location" type="text" placeholder="City, venue, or address" required />
-            </label>
+        <form id="bookingForm" class="booking-form reveal">
+          <div class="stepper" aria-label="Booking progress">
+            <span class="step-pill active">1 Customer</span>
+            <span class="step-pill">2 Event</span>
+            <span class="step-pill">3 Package</span>
+            <span class="step-pill">4 Review</span>
           </div>
-          <fieldset>
-            <legend>Add-ons</legend>
-            <div class="checkbox-grid">
-              <label><input type="checkbox" name="addons" value="Additional Animal Hopper (+$25)" /> Additional Animal Hopper (+$25)</label>
-              <label><input type="checkbox" name="addons" value="Additional Ball Color (+$15)" /> Additional Ball Color (+$15)</label>
-              <label><input type="checkbox" name="addons" value="Toddler Table & Chairs (+$50)" /> Toddler Table &amp; Chairs (+$50)</label>
+
+          <fieldset class="form-step active" data-step="0">
+            <legend>Customer Info</legend>
+            <div class="form-grid">
+              <label>Name<input name="name" type="text" required /></label>
+              <label>Email<input name="email" type="email" required /></label>
+              <label>Phone<input name="phone" type="tel" required /></label>
             </div>
           </fieldset>
-          <label>
-            Notes
-            <textarea name="notes" rows="5" placeholder="Theme, guest count, age range, colors, load-in notes"></textarea>
-          </label>
-          <button class="button button-primary" type="submit">Submit Booking Request</button>
+
+          <fieldset class="form-step" data-step="1">
+            <legend>Event Details</legend>
+            <div class="form-grid">
+              <label>Event Date<input name="eventDate" type="date" required /></label>
+              <label>Event Time<input name="eventTime" type="time" required /></label>
+              <label class="form-wide">Address<input name="location" type="text" placeholder="Event address" required /></label>
+              <label>Indoor / Outdoor
+                <select name="setting" required>
+                  <option value="">Select one</option>
+                  <option>Indoor</option>
+                  <option>Outdoor</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="2">
+            <legend>Package &amp; Add-ons</legend>
+            <div class="choice-grid package-choice-grid">
+              <label class="choice-card"><input type="radio" name="package" value="Basic Package ($250)" data-price="250" required /><span>Basic Package</span><strong>$250</strong></label>
+              <label class="choice-card"><input type="radio" name="package" value="Premium Package ($300)" data-price="300" /><span>Premium Package</span><strong>$300</strong></label>
+              <label class="choice-card"><input type="radio" name="package" value="Custom Quote" data-price="0" /><span>Custom Quote</span><strong>Quote</strong></label>
+            </div>
+            <div class="choice-grid addon-choice-grid" id="bookingAddonChoices"></div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="3">
+            <legend>Review &amp; Submit</legend>
+            <div class="review-card" id="bookingReview"></div>
+            <label>Notes<textarea name="notes" rows="5" placeholder="Theme, guest count, colors, load-in notes"></textarea></label>
+          </fieldset>
+
+          <div class="form-nav">
+            <button class="button button-light" id="prevStep" type="button">Back</button>
+            <button class="button button-secondary" id="nextStep" type="button">Next</button>
+            <button class="button button-primary" id="submitBooking" type="submit">Submit Booking Request</button>
+          </div>
           <p id="bookingMessage" class="form-message" role="status"></p>
         </form>
       </section>
 
+      <section id="faq" class="section-pad warm-band">
+        <div class="section-heading reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Frequently asked questions</h2>
+          <p>$50 Deposit Required To Reserve Your Date</p>
+        </div>
+        <div class="faq-list reveal">
+          <article class="faq-item"><button type="button">How much is required to reserve my event date?</button><p>A $50 non-refundable deposit is required to secure your booking date. Remaining balance is due before event setup.</p></article>
+          <article class="faq-item"><button type="button">How long is each rental?</button><p>Each package includes a 4 hour rental window, plus delivery, setup, and pickup.</p></article>
+          <article class="faq-item"><button type="button">Can I choose ball colors?</button><p>Yes. One ball color is included, and an additional ball color can be added for $15.</p></article>
+          <article class="faq-item"><button type="button">Do you offer outdoor setups?</button><p>Outdoor setups depend on weather, surface condition, and access. We confirm details before booking.</p></article>
+        </div>
+      </section>
+
       <section id="contact" class="section-pad">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">Contact</p>
           <h2>G&amp;S Event Co.</h2>
           <p>Elegant soft play and event rentals for unforgettable celebrations.</p>
         </div>
         <div class="contact-grid">
-          <article><span>Phone</span><strong>(555) 123-4567</strong></article>
-          <article><span>Email</span><strong>hello@gseventco.com</strong></article>
-          <article><span>Service Area</span><strong>Your City + Surrounding Areas</strong></article>
-          <article><span>Social</span><strong>Instagram &middot; Facebook &middot; TikTok</strong></article>
+          <article class="reveal"><span>Phone</span><strong>(555) 123-4567</strong></article>
+          <article class="reveal"><span>Email</span><strong>hello@gseventco.com</strong></article>
+          <article class="reveal"><span>Service Area</span><strong>Your City + Surrounding Areas</strong></article>
+          <article class="reveal"><span>Social</span><strong>Instagram · Facebook · TikTok</strong></article>
         </div>
       </section>
 
       <section id="admin" class="section-pad admin-section warm-band">
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">Admin Preview</p>
           <h2>Booking requests</h2>
           <p>Static localStorage admin area for previewing requests and exporting JSON. Password: admin123</p>
         </div>
-        <div id="adminLogin" class="admin-login">
-          <label>
-            Admin Password
-            <input id="adminPassword" type="password" placeholder="admin123" />
-          </label>
+        <div id="adminLogin" class="admin-login reveal">
+          <label>Admin Password<input id="adminPassword" type="password" placeholder="admin123" /></label>
           <button id="loginButton" class="button button-secondary" type="button">Open Admin</button>
           <p id="loginMessage" class="form-message"></p>
         </div>
         <div id="adminPanel" class="admin-panel" hidden>
           <div class="admin-actions">
             <button id="exportJson" class="button button-secondary" type="button">Export JSON</button>
-            <button id="clearBookings" class="button button-light" type="button">Clear Preview Data</button>
+            <button id="clearBookings" class="button button-light" type="button">Clear Bookings</button>
           </div>
           <div id="bookingPreview" class="booking-preview"></div>
         </div>
       </section>
     </main>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button type="button" id="closeLightbox" aria-label="Close image">×</button>
+      <img id="lightboxImage" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" />
+    </div>
+
+    <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
 
     <footer class="site-footer">
       <a class="brand-mark footer-brand" href="#home" aria-label="G&S Event Co. home">

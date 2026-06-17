@@ -1,35 +1,77 @@
 const bookingKey = "gsEventCoBookings";
 const adminPassword = "admin123";
 
+const packages = {
+  "Basic Package ($250)": 250,
+  "Premium Package ($300)": 300,
+  "Custom Quote": 0
+};
+
 const addOns = [
   {
     name: "Additional Animal Hopper",
     description: "Add another ride-on animal for additional play options.",
-    price: "$25"
+    price: 25,
+    image: "assets/images/animal-hopper.jpg"
   },
   {
     name: "Additional Ball Color",
     description: "Add a second ball color to match your event theme.",
-    price: "$15"
+    price: 15,
+    image: "assets/images/ball-colors.jpg"
   },
   {
     name: "Toddler Table & Chairs",
     description: "Child-sized table and chair setup for snacks, crafts, and activities.",
-    price: "$50"
+    price: 50,
+    image: "assets/images/toddler-table-chairs.jpg"
   }
 ];
 
-const addonCards = document.querySelector("#addonCards");
-const bookingForm = document.querySelector("#bookingForm");
-const bookingMessage = document.querySelector("#bookingMessage");
-const adminPanel = document.querySelector("#adminPanel");
-const bookingPreview = document.querySelector("#bookingPreview");
-const loginButton = document.querySelector("#loginButton");
-const loginMessage = document.querySelector("#loginMessage");
-const exportJson = document.querySelector("#exportJson");
-const clearBookings = document.querySelector("#clearBookings");
-const navToggle = document.querySelector(".nav-toggle");
-const siteNav = document.querySelector(".site-nav");
+const testimonials = [
+  {
+    quote: "Everything was beautiful, clean, and perfectly styled. The kids had the best time.",
+    name: "Jasmine M."
+  },
+  {
+    quote: "The setup looked amazing in photos and made our toddler party feel effortless.",
+    name: "Avery R."
+  },
+  {
+    quote: "Professional, on time, and so easy to work with. The neutral colors were perfect.",
+    name: "Danielle S."
+  }
+];
+
+const qs = (selector) => document.querySelector(selector);
+const qsa = (selector) => Array.from(document.querySelectorAll(selector));
+
+const siteHeader = qs("#siteHeader");
+const navToggle = qs(".nav-toggle");
+const siteNav = qs(".site-nav");
+const backTop = qs("#backTop");
+const addonCards = qs("#addonCards");
+const bookingAddonChoices = qs("#bookingAddonChoices");
+const bookingForm = qs("#bookingForm");
+const bookingMessage = qs("#bookingMessage");
+const bookingReview = qs("#bookingReview");
+const prevStep = qs("#prevStep");
+const nextStep = qs("#nextStep");
+const submitBooking = qs("#submitBooking");
+const adminPanel = qs("#adminPanel");
+const bookingPreview = qs("#bookingPreview");
+const loginButton = qs("#loginButton");
+const loginMessage = qs("#loginMessage");
+const exportJson = qs("#exportJson");
+const clearBookings = qs("#clearBookings");
+const testimonialTrack = qs("#testimonialTrack");
+
+let currentStep = 0;
+let currentTestimonial = 0;
+
+function money(value) {
+  return value === 0 ? "Custom Quote" : `$${value}`;
+}
 
 function getBookings() {
   return JSON.parse(localStorage.getItem(bookingKey) || "[]");
@@ -39,24 +81,117 @@ function saveBookings(bookings) {
   localStorage.setItem(bookingKey, JSON.stringify(bookings));
 }
 
+function selectedAddons() {
+  return qsa('input[name="addons"]:checked').map((input) => ({
+    name: input.value,
+    price: Number(input.dataset.price || 0)
+  }));
+}
+
+function selectedPackage() {
+  const input = qs('input[name="package"]:checked');
+  return {
+    name: input ? input.value : "",
+    price: input ? Number(input.dataset.price || 0) : 0
+  };
+}
+
+function estimateTotal() {
+  const pkg = selectedPackage();
+  if (pkg.name === "Custom Quote") return 0;
+  return pkg.price + selectedAddons().reduce((sum, addon) => sum + addon.price, 0);
+}
+
 function renderAddonCards() {
   addonCards.innerHTML = addOns
     .map(
       (addon) => `
-        <article class="addon-card">
-          <div class="addon-visual" aria-hidden="true"><div class="addon-icon"></div></div>
+        <article class="addon-card reveal">
+          <img src="${addon.image}" alt="${addon.name}" />
           <h3>${addon.name}</h3>
           <p>${addon.description}</p>
-          <strong>${addon.price}</strong>
+          <strong>$${addon.price}</strong>
         </article>
+      `
+    )
+    .join("");
+
+  bookingAddonChoices.innerHTML = addOns
+    .map(
+      (addon) => `
+        <label class="choice-card">
+          <input type="checkbox" name="addons" value="${addon.name} (+$${addon.price})" data-price="${addon.price}" />
+          <span>${addon.name}</span>
+          <strong>+$${addon.price}</strong>
+        </label>
       `
     )
     .join("");
 }
 
+function showStep(index) {
+  const steps = qsa(".form-step");
+  const pills = qsa(".step-pill");
+  currentStep = Math.max(0, Math.min(index, steps.length - 1));
+
+  steps.forEach((step, stepIndex) => step.classList.toggle("active", stepIndex === currentStep));
+  pills.forEach((pill, pillIndex) => pill.classList.toggle("active", pillIndex === currentStep));
+
+  prevStep.style.display = currentStep === 0 ? "none" : "inline-flex";
+  nextStep.style.display = currentStep === steps.length - 1 ? "none" : "inline-flex";
+  submitBooking.style.display = currentStep === steps.length - 1 ? "inline-flex" : "none";
+
+  if (currentStep === steps.length - 1) renderReview();
+}
+
+function stepIsValid() {
+  const current = qsa(".form-step")[currentStep];
+  const requiredFields = Array.from(current.querySelectorAll("[required]"));
+  return requiredFields.every((field) => field.reportValidity());
+}
+
+function renderReview() {
+  const formData = new FormData(bookingForm);
+  const pkg = selectedPackage();
+  const addons = selectedAddons();
+  const total = estimateTotal();
+
+  bookingReview.innerHTML = `
+    <div><span>Customer</span><strong>${formData.get("name") || "Not entered"}</strong></div>
+    <div><span>Event</span><strong>${formData.get("eventDate") || "Date TBD"} at ${formData.get("eventTime") || "Time TBD"}</strong></div>
+    <div><span>Location</span><strong>${formData.get("location") || "Not entered"} · ${formData.get("setting") || "Setting TBD"}</strong></div>
+    <div><span>Package</span><strong>${pkg.name || "Not selected"}</strong></div>
+    <div><span>Add-ons</span><strong>${addons.length ? addons.map((addon) => addon.name).join(", ") : "None selected"}</strong></div>
+    <div><span>Estimated Total</span><strong>${money(total)}</strong></div>
+    <div><span>Deposit</span><strong>$50 Deposit Required To Reserve Your Date</strong></div>
+  `;
+}
+
+function bookingPayload() {
+  const formData = new FormData(bookingForm);
+  const pkg = selectedPackage();
+  const addons = selectedAddons();
+
+  return {
+    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    name: formData.get("name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    eventDate: formData.get("eventDate"),
+    eventTime: formData.get("eventTime"),
+    location: formData.get("location"),
+    setting: formData.get("setting"),
+    package: pkg.name,
+    packagePrice: pkg.price,
+    addons,
+    estimatedTotal: estimateTotal(),
+    notes: formData.get("notes"),
+    createdAt: new Date().toISOString()
+  };
+}
+
 function renderBookings() {
   const bookings = getBookings();
-
   if (!bookings.length) {
     bookingPreview.innerHTML = '<p class="form-message">No booking requests yet.</p>';
     return;
@@ -68,20 +203,20 @@ function renderBookings() {
         <article class="booking-item">
           <h3>${booking.package}</h3>
           <dl>
-            <dt>Selected Package</dt>
-            <dd>${booking.package}</dd>
-            <dt>Selected Add-ons</dt>
-            <dd>${booking.addons.length ? booking.addons.join(", ") : "None selected"}</dd>
-            <dt>Customer</dt>
+            <dt>Customer Info</dt>
             <dd>${booking.name}<br>${booking.email}<br>${booking.phone}</dd>
             <dt>Event Date/Time</dt>
             <dd>${booking.eventDate} at ${booking.eventTime}</dd>
-            <dt>Event Location</dt>
-            <dd>${booking.location}</dd>
+            <dt>Location</dt>
+            <dd>${booking.location}<br>${booking.setting || ""}</dd>
+            <dt>Selected Package</dt>
+            <dd>${booking.package}</dd>
+            <dt>Selected Add-ons</dt>
+            <dd>${booking.addons && booking.addons.length ? booking.addons.map((addon) => addon.name).join(", ") : "None selected"}</dd>
+            <dt>Estimated Total</dt>
+            <dd>${money(Number(booking.estimatedTotal || 0))}</dd>
             <dt>Notes</dt>
             <dd>${booking.notes || "No notes provided"}</dd>
-            <dt>Submitted</dt>
-            <dd>${new Date(booking.createdAt).toLocaleString()}</dd>
           </dl>
         </article>
       `
@@ -90,8 +225,7 @@ function renderBookings() {
 }
 
 function downloadJson() {
-  const bookings = getBookings();
-  const blob = new Blob([JSON.stringify(bookings, null, 2)], { type: "application/json" });
+  const blob = new Blob([JSON.stringify(getBookings(), null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -100,68 +234,142 @@ function downloadJson() {
   URL.revokeObjectURL(url);
 }
 
+function renderTestimonials() {
+  testimonialTrack.innerHTML = testimonials
+    .map(
+      (testimonial, index) => `
+        <article class="testimonial-card ${index === currentTestimonial ? "active" : ""}">
+          <p>"${testimonial.quote}"</p>
+          <strong>${testimonial.name}</strong>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function changeTestimonial(direction) {
+  currentTestimonial = (currentTestimonial + direction + testimonials.length) % testimonials.length;
+  renderTestimonials();
+}
+
+function openLightbox(image) {
+  qs("#lightboxImage").src = image.src;
+  qs("#lightboxImage").alt = image.alt;
+  qs("#lightbox").hidden = false;
+}
+
+function closeLightbox() {
+  qs("#lightbox").hidden = true;
+}
+
+renderAddonCards();
+renderTestimonials();
+showStep(0);
+document.querySelector("#year").textContent = new Date().getFullYear();
+
+const observer = new IntersectionObserver(
+  (entries) => entries.forEach((entry) => entry.target.classList.toggle("visible", entry.isIntersecting)),
+  { threshold: 0.12 }
+);
+qsa(".reveal").forEach((element) => observer.observe(element));
+
+window.addEventListener("scroll", () => {
+  siteHeader.classList.toggle("shrunk", window.scrollY > 70);
+  backTop.classList.toggle("visible", window.scrollY > 500);
+});
+
+navToggle.addEventListener("click", () => {
+  const isOpen = siteNav.classList.toggle("open");
+  navToggle.classList.toggle("open", isOpen);
+  navToggle.setAttribute("aria-expanded", String(isOpen));
+  document.body.classList.toggle("menu-open", isOpen);
+});
+
+siteNav.addEventListener("click", (event) => {
+  if (event.target.tagName === "A") {
+    siteNav.classList.remove("open");
+    navToggle.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  }
+});
+
+qsa("[data-package-focus]").forEach((button) => {
+  button.addEventListener("click", () => {
+    qsa("[data-package-focus]").forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
+    qsa("[data-package-card]").forEach((card) => card.classList.toggle("dimmed", card.dataset.packageCard !== button.dataset.packageFocus));
+  });
+});
+
+qsa("[data-package-pick]").forEach((link) => {
+  link.addEventListener("click", () => {
+    const value = link.dataset.packagePick;
+    setTimeout(() => {
+      const input = qsa('input[name="package"]').find((radio) => radio.value === value);
+      if (input) input.checked = true;
+      renderReview();
+    }, 120);
+  });
+});
+
+qsa(".gallery-item").forEach((button) => {
+  button.addEventListener("click", () => openLightbox(button.querySelector("img")));
+});
+qs("#closeLightbox").addEventListener("click", closeLightbox);
+qs("#lightbox").addEventListener("click", (event) => {
+  if (event.target.id === "lightbox") closeLightbox();
+});
+
+qsa(".faq-item button").forEach((button) => {
+  button.addEventListener("click", () => button.parentElement.classList.toggle("open"));
+});
+
+qsa("[data-slide]").forEach((button) => {
+  button.addEventListener("click", () => changeTestimonial(button.dataset.slide === "next" ? 1 : -1));
+});
+setInterval(() => changeTestimonial(1), 6500);
+
+backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+nextStep.addEventListener("click", () => {
+  if (stepIsValid()) showStep(currentStep + 1);
+});
+prevStep.addEventListener("click", () => showStep(currentStep - 1));
+bookingForm.addEventListener("change", renderReview);
+bookingForm.addEventListener("input", renderReview);
+
 bookingForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const formData = new FormData(bookingForm);
-  const addons = formData.getAll("addons");
-  const booking = {
-    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-    name: formData.get("name"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    package: formData.get("package"),
-    addons,
-    eventDate: formData.get("eventDate"),
-    eventTime: formData.get("eventTime"),
-    location: formData.get("location"),
-    notes: formData.get("notes"),
-    createdAt: new Date().toISOString()
-  };
+  if (!stepIsValid()) return;
 
+  const booking = bookingPayload();
   const bookings = getBookings();
   bookings.unshift(booking);
   saveBookings(bookings);
 
   // Future Twilio integration:
-  // Send text message to G&S Event Co. partners when a booking request is submitted.
+  // Send SMS notification to G&S Event Co. partners when a booking request is submitted.
 
   bookingForm.reset();
   bookingMessage.textContent = "Your booking request has been saved. G&S Event Co. will follow up soon.";
+  showStep(0);
   renderBookings();
 });
 
 loginButton.addEventListener("click", () => {
-  const password = document.querySelector("#adminPassword").value;
-
-  if (password !== adminPassword) {
+  if (qs("#adminPassword").value !== adminPassword) {
     loginMessage.textContent = "Incorrect password.";
     return;
   }
-
   loginMessage.textContent = "";
   adminPanel.hidden = false;
   renderBookings();
 });
 
 exportJson.addEventListener("click", downloadJson);
-
 clearBookings.addEventListener("click", () => {
   if (!confirm("Clear all local preview booking requests?")) return;
   saveBookings([]);
   renderBookings();
 });
-
-navToggle.addEventListener("click", () => {
-  const isOpen = siteNav.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
-});
-
-siteNav.addEventListener("click", (event) => {
-  if (event.target.tagName === "A") {
-    siteNav.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
-  }
-});
-
-document.querySelector("#year").textContent = new Date().getFullYear();
-renderAddonCards();
